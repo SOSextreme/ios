@@ -75,14 +75,35 @@ class ViewController: UIViewController, VCSessionDelegate {
     
     func fbLogin() {
         let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withPublishPermissions: ["publish_actions"], from: self) { (result, error) in
+        loginManager.logIn(withPublishPermissions: ["publish_actions"], from: self) {
+            (result, error) in
             if error != nil {
                 print("Error")
             } else if result?.isCancelled == true {
                 print("Cancelled")
             } else {
-                print("Logged in")
+           
+                print("Logged in!")
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name,last_name, picture.type(large),email,updated_time"]).start(completionHandler: { (connection, result, error) -> Void in
+                    if (error == nil){
+                        
+                        if let userDict = result as? NSDictionary {
+                            let first_Name = userDict["first_name"] as! String
+                            let last_Name = userDict["last_name"] as! String
+                            let id = userDict["id"] as! String
+                            //let email = userDict["email"] as! String
+                            print(first_Name)
+                            print(last_Name)
+                            print(id)
+                            //print(email)
+                            print(userDict)
+                            //self.lbShow.text = "Hi " + first_Name
+                            //se/lf.show(active : true,name:first_Name)
+                        }
+                    }
+                })
             }
+
         }
     }
     

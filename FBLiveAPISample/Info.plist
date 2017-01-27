@@ -30,9 +30,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>Put your fb app id</string>
+	<string>698943063589137</string>
 	<key>FacebookDisplayName</key>
-	<string>Put your fb display name</string>
+	<string>OnlyMyTestApp</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
