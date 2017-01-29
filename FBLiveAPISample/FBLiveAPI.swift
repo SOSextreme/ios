@@ -39,7 +39,7 @@ class FBLiveAPI {
                 _ = request?.start { (_, result, error) in
                     if error == nil {
                         self.liveVideoId = (result as? NSDictionary)?.value(forKey: "id") as? String
-                        callback(result)
+                        callback(result as Any)
                     }
                 }
             }

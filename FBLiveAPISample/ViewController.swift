@@ -30,8 +30,10 @@ class ViewController: UIViewController, VCSessionDelegate {
     @IBAction func live() {
         switch session.rtmpSessionState {
         case .none, .previewStarted, .ended, .error:
+            print("startlive")
             startFBLive()
         default:
+            print("endlive")
             endFBLive()
             break
         }
@@ -39,7 +41,9 @@ class ViewController: UIViewController, VCSessionDelegate {
     
     func startFBLive() {
         if FBSDKAccessToken.current() != nil {
+            print(FBSDKAccessToken.current())
             FBLiveAPI.shared.startLive(privacy: livePrivacy) { result in
+                print(result)
                 guard let streamUrlString = (result as? NSDictionary)?.value(forKey: "stream_url") as? String else {
                     return
                 }
@@ -49,7 +53,7 @@ class ViewController: UIViewController, VCSessionDelegate {
                     let query = streamUrl?.query else {
                         return
                 }
-                
+                print(streamUrl as Any)
                 self.session.startRtmpSession(
                     withURL: "rtmp://rtmp-api.facebook.com:80/rtmp/",
                     andStreamKey: "\(lastPathComponent)?\(query)"

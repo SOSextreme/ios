@@ -14,6 +14,7 @@
 		B639EFB51D8EF81F00BFE948 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B639EFB31D8EF81F00BFE948 /* LaunchScreen.storyboard */; };
 		B639EFBE1D8EF86300BFE948 /* FBLiveAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B639EFBC1D8EF86300BFE948 /* FBLiveAPI.swift */; };
 		B96897BFEBB2157D0F00C010 /* libPods-FBLiveAPISample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 313A572D9B475AB728067F97 /* libPods-FBLiveAPISample.a */; };
+		E351641C1E3E76ED0036D672 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E351641B1E3E76ED0036D672 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		B639EFBC1D8EF86300BFE948 /* FBLiveAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBLiveAPI.swift; sourceTree = "<group>"; };
 		B639EFBD1D8EF86300BFE948 /* FBLiveAPISample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBLiveAPISample-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB6437FE0EF67D4642CA0CB8 /* Pods-FBLiveAPISample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBLiveAPISample.release.xcconfig"; path = "Pods/Target Support Files/Pods-FBLiveAPISample/Pods-FBLiveAPISample.release.xcconfig"; sourceTree = "<group>"; };
+		E351641B1E3E76ED0036D672 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E351641C1E3E76ED0036D672 /* CoreLocation.framework in Frameworks */,
 				B96897BFEBB2157D0F00C010 /* libPods-FBLiveAPISample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +49,7 @@
 		6A205F4EA9660706E9A92964 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E351641B1E3E76ED0036D672 /* CoreLocation.framework */,
 				313A572D9B475AB728067F97 /* libPods-FBLiveAPISample.a */,
 			);
 			name = Frameworks;
@@ -128,7 +132,7 @@
 				TargetAttributes = {
 					B639EFA61D8EF81F00BFE948 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 8U699PXSRE;
+						DevelopmentTeam = DU9WYQFJHE;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -266,7 +270,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ruicong Xie (3P9Q39Q3C6)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -285,7 +289,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -315,7 +319,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ruicong Xie (3P9Q39Q3C6)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -328,7 +332,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -341,7 +345,12 @@
 			baseConfigurationReference = 441A0C2DF82A5BD07E4F1AD9 /* Pods-FBLiveAPISample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8U699PXSRE;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DU9WYQFJHE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FBLiveAPISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -357,7 +366,12 @@
 			baseConfigurationReference = BB6437FE0EF67D4642CA0CB8 /* Pods-FBLiveAPISample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8U699PXSRE;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DU9WYQFJHE;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FBLiveAPISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
