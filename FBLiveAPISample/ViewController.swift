@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController, VCSessionDelegate {
+class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDelegate {
     @IBOutlet var contentView: UIView!
     @IBOutlet var liveButton: UIButton!
     @IBOutlet var livePrivacyControl: UISegmentedControl!
     
     var session: VCSimpleSession!
     var livePrivacy: FBLivePrivacy = .closed
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +27,52 @@ class ViewController: UIViewController, VCSessionDelegate {
         contentView.addSubview(session.previewView)
         session.previewView.frame = contentView.bounds
         session.delegate = self
+        if (CLLocationManager.locationServicesEnabled())
+        {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            
+            //start polling locations
+            //locationManager.startUpdatingLocation()
+        }
+        else
+        {
+            #if debug
+                println("Location services are not enabled");
+            #endif           
+        }
+    }
+ 
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        
+        let userLocation:CLLocation = locations[0]
+        
+        let latitude:CLLocationDegrees = userLocation.coordinate.latitude
+        
+        let longitude:CLLocationDegrees = userLocation.coordinate.longitude
+        
+        let latDelta:CLLocationDegrees = 0.05
+        
+        let lonDelta:CLLocationDegrees = 0.05
+        
+        print(latitude)
+        
+        print(longitude)
+        
+        /*
+         let pin = MKPointAnnotation()
+         pin.coordinate.latitude = userLocation.coordinate.latitude
+         pin.coordinate.longitude = userLocation.coordinate.longitude
+         pin.title = "Your movement line"
+         map.addAnnotation(pin)
+         */
     }
 
+    
+  
     @IBAction func live() {
         switch session.rtmpSessionState {
         case .none, .previewStarted, .ended, .error:
