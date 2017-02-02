@@ -60,7 +60,7 @@ class FBLiveAPI {
                 
                 _ = request?.start { (_, result, error) in
                     if error == nil {
-                        callback(result)
+                        callback(result as Any)
                     }
                 }
             }

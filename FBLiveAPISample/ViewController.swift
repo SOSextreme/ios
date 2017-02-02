@@ -54,9 +54,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         
         let longitude:CLLocationDegrees = userLocation.coordinate.longitude
         
-        let latDelta:CLLocationDegrees = 0.05
+        //let latDelta:CLLocationDegrees = 0.05
         
-        let lonDelta:CLLocationDegrees = 0.05
+        //let lonDelta:CLLocationDegrees = 0.05
         
         print(latitude)
         
