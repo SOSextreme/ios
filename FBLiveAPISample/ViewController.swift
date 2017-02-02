@@ -205,7 +205,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": self.fbid + " My name:" + self.fbname ,"url":"https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/16174661_2210167592541895_7349132334576464638_n.jpg?oh=1d736eb93e94684a076cf67e47b696cf&oe=59012529"],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
+        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": self.fbid + " My name:" + self.fbname ,"url":"https://images.moviepilot.com/images/c_limit,q_auto,w_710/uonhjshvd4nbqnjy7czf/avengers-infinity-war-part-1-could-the-red-skull-be-released-from-the-tesseract.jpg"],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
                 
                     print(result as Any)
