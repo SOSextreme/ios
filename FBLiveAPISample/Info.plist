@@ -2,16 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We try to save suspect&apos;s photo</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>SOS your current location!</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>SOS your current location!</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>FBLiveAPISample</string>
+	<string>SOS</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -55,8 +49,14 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Facebook Live API Sample</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>SOS your current location!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>SOS your current location!</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Facebook Live API Sample</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We try to save suspect's photo</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

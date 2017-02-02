@@ -205,13 +205,26 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": self.fbid + " My name:" + self.fbname ,"url":"https://images.moviepilot.com/images/c_limit,q_auto,w_710/uonhjshvd4nbqnjy7czf/avengers-infinity-war-part-1-could-the-red-skull-be-released-from-the-tesseract.jpg"],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
-            if (error == nil){
-                
+        let imagePath =  self.fbid + String(Date().timeIntervalSince1970)
+        guard let imageURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imagePath+".png" ) else {
+            return
+        }
+        print(imageURL)
+        // save image to URL
+        do {
+            try UIImagePNGRepresentation(image!)?.write(to: imageURL)
+            FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": self.fbid + " My name:" + self.fbname ,"url":imageURL],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    
                     print(result as Any)
                 }
-            
+                
             })
+        } catch {
+            print("write file error")
+        }
+        
+      
         
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
     }
