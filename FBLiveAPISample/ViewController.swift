@@ -127,7 +127,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     
     func fbLogin() {
         let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withPublishPermissions: ["publish_actions"], from: self) {
+        loginManager.logIn(withPublishPermissions: ["publish_actions", "user_photos","email"], from: self) {
             (result, error) in
             if error != nil {
                 print("Error")
@@ -203,8 +203,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
-    
+        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": "test%20photo%20upload","url":"https%3A%2F%2Fwww.facebook.com%2Fimages%2Ffb_icon_325x325.png"],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
+            if (error == nil){
+                
+                    print(result as Any)
+                }
+            
+            })
+        
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
     }
 }
