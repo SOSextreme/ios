@@ -19,6 +19,7 @@ enum FBLivePrivacy: StringLiteralType {
 class FBLiveAPI {
     typealias CallbackBlock = ((Any) -> Void)
     var liveVideoId: String?
+    var albumId: String?
     
     static let shared = FBLiveAPI()
     
@@ -39,6 +40,30 @@ class FBLiveAPI {
                 _ = request?.start { (_, result, error) in
                     if error == nil {
                         self.liveVideoId = (result as? NSDictionary)?.value(forKey: "id") as? String
+                        callback(result as Any)
+                    }
+                }
+            }
+        }
+    }
+    func createAlbum(privacy: FBLivePrivacy, name:String, callback: @escaping CallbackBlock) {
+        DispatchQueue.main.async {
+            if FBSDKAccessToken.current().hasGranted("publish_actions") {
+                let path = "/me/albums"
+                let params = [
+                    "name":name,
+                    "privacy": "{\"value\":\"\(privacy.rawValue)\"}"
+                ]
+                
+                let request = FBSDKGraphRequest(
+                    graphPath: path,
+                    parameters: params,
+                    httpMethod: "POST"
+                )
+                
+                _ = request?.start { (_, result, error) in
+                    if error == nil {
+                        self.albumId = (result as? NSDictionary)?.value(forKey: "id") as? String
                         callback(result as Any)
                     }
                 }

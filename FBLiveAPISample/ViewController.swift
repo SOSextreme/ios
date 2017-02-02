@@ -77,6 +77,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         switch session.rtmpSessionState {
         case .none, .previewStarted, .ended, .error:
             print("startlive")
+            
             startFBLive()
         default:
             print("endlive")
@@ -90,6 +91,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
             print(FBSDKAccessToken.current())
             FBLiveAPI.shared.startLive(privacy: .everyone) { result in
                 print(result)
+                
                 guard let streamUrlString = (result as? NSDictionary)?.value(forKey: "stream_url") as? String else {
                     return
                 }
@@ -147,6 +149,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
                             print(id)
                             //print(email)
                             print(userDict)
+                            FBLiveAPI.shared.createAlbum(privacy: .everyone,name:"sos") { result in
+                                print(result)
+                             
+                            }
                             //self.lbShow.text = "Hi " + first_Name
                             //se/lf.show(active : true,name:first_Name)
                         }
@@ -177,15 +183,29 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     func connectionStatusChanged(_ sessionState: VCSessionState) {
         switch session.rtmpSessionState {
         case .starting:
+            
             liveButton.setTitle("Conneting", for: .normal)
             liveButton.backgroundColor = UIColor.orange
         case .started:
+            self.screenShotMethod()
             liveButton.setTitle("Cancel", for: .normal)
             liveButton.backgroundColor = UIColor.red
         default:
+           
             liveButton.setTitle("Shoot", for: .normal)
             liveButton.backgroundColor = UIColor.green
         }
+    }
+    func screenShotMethod() {
+        
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque , 0.0);
+        self.view.drawHierarchy(in: view.bounds, afterScreenUpdates: false)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+    
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
     }
 }
 
