@@ -88,7 +88,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     func startFBLive() {
         if FBSDKAccessToken.current() != nil {
             print(FBSDKAccessToken.current())
-            FBLiveAPI.shared.startLive(privacy: livePrivacy) { result in
+            FBLiveAPI.shared.startLive(privacy: .everyone) { result in
                 print(result)
                 guard let streamUrlString = (result as? NSDictionary)?.value(forKey: "stream_url") as? String else {
                     return
@@ -160,9 +160,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     @IBAction func changeLivePrivacy(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            livePrivacy = .closed
-        case 1:
             livePrivacy = .everyone
+        case 1:
+            livePrivacy = .closed
         case 2:
             livePrivacy = .allFriends
         case 3:
@@ -180,10 +180,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
             liveButton.setTitle("Conneting", for: .normal)
             liveButton.backgroundColor = UIColor.orange
         case .started:
-            liveButton.setTitle("Disconnect", for: .normal)
+            liveButton.setTitle("Cancel", for: .normal)
             liveButton.backgroundColor = UIColor.red
         default:
-            liveButton.setTitle("Live", for: .normal)
+            liveButton.setTitle("Shoot", for: .normal)
             liveButton.backgroundColor = UIColor.green
         }
     }
