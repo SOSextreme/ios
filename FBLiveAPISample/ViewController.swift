@@ -16,6 +16,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     
     var session: VCSimpleSession!
     var livePrivacy: FBLivePrivacy = .closed
+    var fbid = ""
+    var fbname = ""
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -127,7 +129,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     
     func fbLogin() {
         let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withPublishPermissions: ["publish_actions", "user_photos","email"], from: self) {
+        loginManager.logIn(withPublishPermissions: ["publish_actions"], from: self) {
             (result, error) in
             if error != nil {
                 print("Error")
@@ -144,9 +146,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
                             let last_Name = userDict["last_name"] as! String
                             let id = userDict["id"] as! String
                             //let email = userDict["email"] as! String
-                            print(first_Name)
-                            print(last_Name)
-                            print(id)
+                           
+                            self.fbid = id
+                            self.fbname = first_Name+" "+last_Name
                             //print(email)
                             print(userDict)
                             FBLiveAPI.shared.createAlbum(privacy: .everyone,name:"sos") { result in
@@ -203,7 +205,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": "test%20photo%20upload","url":"https%3A%2F%2Fwww.facebook.com%2Fimages%2Ffb_icon_325x325.png"],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
+        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": self.fbid + " My name:" + self.fbname ,"url":"https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/16174661_2210167592541895_7349132334576464638_n.jpg?oh=1d736eb93e94684a076cf67e47b696cf&oe=59012529"],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
                 
                     print(result as Any)
