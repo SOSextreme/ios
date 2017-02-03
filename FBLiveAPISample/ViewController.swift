@@ -129,6 +129,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     
     func fbLogin() {
         let loginManager = FBSDKLoginManager()
+        
         loginManager.logIn(withPublishPermissions: ["publish_actions"], from: self) {
             (result, error) in
             if error != nil {
@@ -136,33 +137,42 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
             } else if result?.isCancelled == true {
                 print("Cancelled")
             } else {
-           
-                print("Logged in!")
-                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name,last_name, picture.type(large),email,updated_time"]).start(completionHandler: { (connection, result, error) -> Void in
-                    if (error == nil){
-                        
-                        if let userDict = result as? NSDictionary {
-                            let first_Name = userDict["first_name"] as! String
-                            let last_Name = userDict["last_name"] as! String
-                            let id = userDict["id"] as! String
-                            //let email = userDict["email"] as! String
-                           
-                            self.fbid = id
-                            self.fbname = first_Name+" "+last_Name
-                            //print(email)
-                            print(userDict)
-                            FBLiveAPI.shared.createAlbum(privacy: .everyone,name:"sos") { result in
-                                print(result)
-                             
+                loginManager.logIn(withReadPermissions: ["user_photos","email"], from: self) {
+                    (result, error) in
+                    if error != nil {
+                        print("Error")
+                    } else if result?.isCancelled == true {
+                        print("Cancelled")
+                    } else {
+                        FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name,last_name, picture.type(large),email,updated_time"]).start(completionHandler: { (connection, result, error) -> Void in
+                            if (error == nil){
+                                
+                                if let userDict = result as? NSDictionary {
+                                    let first_Name = userDict["first_name"] as! String
+                                    let last_Name = userDict["last_name"] as! String
+                                    let id = userDict["id"] as! String
+                                    //let email = userDict["email"] as! String
+                                    
+                                    self.fbid = id
+                                    self.fbname = first_Name+" "+last_Name
+                                    //print(email)
+                                    print(userDict)
+                                    FBLiveAPI.shared.createAlbum(privacy: .everyone,name:"sos") { result in
+                                        print(result)
+                                        
+                                    }
+                                    //self.lbShow.text = "Hi " + first_Name
+                                    //se/lf.show(active : true,name:first_Name)
+                                }
                             }
-                            //self.lbShow.text = "Hi " + first_Name
-                            //se/lf.show(active : true,name:first_Name)
-                        }
+                        })//end of user info
+                    
                     }
-                })
+                }//end of read permission
+              
             }
 
-        }
+        }//end of publish permission
     }
     
     @IBAction func changeLivePrivacy(sender: UISegmentedControl) {
@@ -209,18 +219,35 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
        // let imageURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true).appendingPathComponent(imagePath)?.appendingPathExtension("png")
         // print(imageURL as Any)
         // save image to URL
-        do {
-            //try UIImagePNGRepresentation(image!)?.write(to: imageURL!)
-            FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": self.fbid + " My name:" + self.fbname ,"sourceImage":UIImagePNGRepresentation(image!) as Any],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
-                if (error == nil){
+        
+        //try UIImagePNGRepresentation(image!)?.write(to: imageURL!)
+        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": "Watch my live location at http://54.221.40.5:9000/w/"+self.fbid + " My name:" + self.fbname ,"sourceImage":UIImagePNGRepresentation(image!) as Any],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
+            if (error == nil){
+                if let photoRes = result as? NSDictionary {
+                    let picId = photoRes["id"] as! String
+                    print(picId)
+                    FBSDKGraphRequest(graphPath: picId+"/picture", parameters: ["redirect":false]).start(completionHandler: { (connection, result, error) -> Void in
+                        if (error == nil){
+                            if let photoUrl = result as? NSDictionary {
+                                if let decode = photoUrl["data"]as? NSDictionary {
+                                  
+                                    print(decode["url"] as Any)
+                                }
+                            }
+                        }else{
+                            print(error as Any)
+                        }
+                    })
+
                     
-                    print(result as Any)
+                    
+                    
+                    
                 }
-                
-            })
-        } catch {
-            print("write file error")
-        }
+            }
+            
+        })
+      
         
       
         
