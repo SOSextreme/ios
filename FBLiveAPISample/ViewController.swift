@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import SocketIO
 
 class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDelegate {
     @IBOutlet var contentView: UIView!

@@ -14,7 +14,23 @@
 		B639EFB51D8EF81F00BFE948 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B639EFB31D8EF81F00BFE948 /* LaunchScreen.storyboard */; };
 		B639EFBE1D8EF86300BFE948 /* FBLiveAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B639EFBC1D8EF86300BFE948 /* FBLiveAPI.swift */; };
 		B96897BFEBB2157D0F00C010 /* libPods-FBLiveAPISample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 313A572D9B475AB728067F97 /* libPods-FBLiveAPISample.a */; };
+		E3E2108A1E4504AC00989D0F /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E210891E4504AC00989D0F /* SocketIO.framework */; };
+		E3E2108B1E4504AC00989D0F /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3E210891E4504AC00989D0F /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E3E2108C1E4504AC00989D0F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E3E2108B1E4504AC00989D0F /* SocketIO.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		313A572D9B475AB728067F97 /* libPods-FBLiveAPISample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FBLiveAPISample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +45,7 @@
 		B639EFBC1D8EF86300BFE948 /* FBLiveAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBLiveAPI.swift; sourceTree = "<group>"; };
 		B639EFBD1D8EF86300BFE948 /* FBLiveAPISample-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FBLiveAPISample-Bridging-Header.h"; sourceTree = "<group>"; };
 		BB6437FE0EF67D4642CA0CB8 /* Pods-FBLiveAPISample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FBLiveAPISample.release.xcconfig"; path = "Pods/Target Support Files/Pods-FBLiveAPISample/Pods-FBLiveAPISample.release.xcconfig"; sourceTree = "<group>"; };
+		E3E210891E4504AC00989D0F /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B96897BFEBB2157D0F00C010 /* libPods-FBLiveAPISample.a in Frameworks */,
+				E3E2108A1E4504AC00989D0F /* SocketIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +81,7 @@
 		B639EF9E1D8EF81E00BFE948 = {
 			isa = PBXGroup;
 			children = (
+				E3E210891E4504AC00989D0F /* SocketIO.framework */,
 				B639EFA91D8EF81F00BFE948 /* FBLiveAPISample */,
 				B639EFA81D8EF81F00BFE948 /* Products */,
 				AFD2144524A03F0EC8910A64 /* Pods */,
@@ -106,6 +125,7 @@
 				B639EFA51D8EF81F00BFE948 /* Resources */,
 				85EDA7FEEE14F8807BAFEA4C /* [CP] Embed Pods Frameworks */,
 				960838FF84436051C7194AB5 /* [CP] Copy Pods Resources */,
+				E3E2108C1E4504AC00989D0F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -348,6 +368,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FBLiveAPISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -370,6 +391,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = FBLiveAPISample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
