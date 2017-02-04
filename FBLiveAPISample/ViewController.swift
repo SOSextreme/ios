@@ -76,7 +76,6 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
                 self.socket.emit("live_update", ["fbId": self.fbid,"fbName": self.fbname,"lat":latitude,"lng":longitude])
             }
         }
-    
     }
 
     
