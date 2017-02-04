@@ -19,7 +19,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     var livePrivacy: FBLivePrivacy = .closed
     var fbid = ""
     var fbname = ""
+    var initUpload = true
     var locationManager = CLLocationManager()
+    let socket = SocketIOClient(socketURL: URL(string: "http://localhost:9000")!, config: [.log(true), .forcePolling(true)])
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +49,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
                 println("Location services are not enabled");
             #endif           
         }
+        socket.connect()
+       
     }
  
     
@@ -57,21 +63,20 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         
         let longitude:CLLocationDegrees = userLocation.coordinate.longitude
         
-        //let latDelta:CLLocationDegrees = 0.05
+   
         
-        //let lonDelta:CLLocationDegrees = 0.05
+        //print(latitude)
         
-        print(latitude)
-        
-        print(longitude)
-        
-        /*
-         let pin = MKPointAnnotation()
-         pin.coordinate.latitude = userLocation.coordinate.latitude
-         pin.coordinate.longitude = userLocation.coordinate.longitude
-         pin.title = "Your movement line"
-         map.addAnnotation(pin)
-         */
+        //print(longitude)
+        if (self.fbid != ""){
+            if (self.initUpload){
+                self.initUpload = false
+                self.socket.emit("init", ["fbId": self.fbid,"fbName": self.fbname,"lat":latitude,"lng":longitude])
+            }else{
+                self.socket.emit("live_update", ["fbId": self.fbid,"fbName": self.fbname,"lat":latitude,"lng":longitude])
+            }
+        }
+    
     }
 
     
@@ -80,10 +85,12 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         switch session.rtmpSessionState {
         case .none, .previewStarted, .ended, .error:
             print("startlive")
-            
+            locationManager.startUpdatingLocation()
             startFBLive()
         default:
             print("endlive")
+            locationManager.stopUpdatingLocation()
+            self.initUpload = true
             endFBLive()
             break
         }
@@ -233,6 +240,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
                                 if let decode = photoUrl["data"]as? NSDictionary {
                                   
                                     print(decode["url"] as Any)
+                                    if (self.fbid != ""){
+                                       
+                                            self.socket.emit("criminal_img", ["fbId": self.fbid,"url": decode["url"] as Any])
+                                       
+                                    }
                                 }
                             }
                         }else{
