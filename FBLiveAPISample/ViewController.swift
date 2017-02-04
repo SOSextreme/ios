@@ -21,7 +21,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
     var fbname = ""
     var initUpload = true
     var locationManager = CLLocationManager()
-    let socket = SocketIOClient(socketURL: URL(string: "http://localhost:9000")!, config: [.log(true), .forcePolling(true)])
+    let socket = SocketIOClient(socketURL: URL(string: "http://54.221.40.5:9000")!, config: [.log(true), .forcePolling(true)])
     
    
     
@@ -229,7 +229,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate, VCSessionDeleg
         // save image to URL
         
         //try UIImagePNGRepresentation(image!)?.write(to: imageURL!)
-        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": "Watch my live location at http://54.221.40.5:9000/w/"+self.fbid + " My name:" + self.fbname ,"sourceImage":UIImagePNGRepresentation(image!) as Any],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
+        FBSDKGraphRequest(graphPath: "me/photos", parameters: ["caption": "I am threatened. Please help. Watch my live location at http://54.221.40.5:9000/w/"+self.fbid  ,"sourceImage":UIImagePNGRepresentation(image!) as Any],httpMethod: "POST").start(completionHandler: { (connection, result, error) -> Void in
             if (error == nil){
                 if let photoRes = result as? NSDictionary {
                     let picId = photoRes["id"] as! String
